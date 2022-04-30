@@ -31,6 +31,8 @@ const Home = () => {
       {/*   // TODO       */}
       {/* Because the axios response is not mocked, the following condition is not covered. */}
       {data && data.data?.map(({ label }) => <p key={label}>{label}</p>)}
+      {data && data.err && <p>Something went wrong</p>}
+
       <User btnConfig={btnConfig} />
       <FileUpload onUpdate={fileUploaded} />
     </div>

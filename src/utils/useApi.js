@@ -9,9 +9,6 @@ const useApi = ({ url, method, data = null }) => {
     isSuccessful: null,
   });
 
-  // TODO
-  /* when I try to invoke this hook from component I am not able to 
-  mock success and error scenarios of axios*/
   const callToApi = useCallback(
     (reqData) => {
       setResponse({
@@ -28,7 +25,7 @@ const useApi = ({ url, method, data = null }) => {
       })
         .then((res) => {
           setResponse({
-            data: res.data || "Success",
+            data: res.data,
             err: null,
             isSuccessful: true,
           });

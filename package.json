@@ -28,6 +28,7 @@
     "collectCoverageFrom": [
       "src/*/*.{js,jsx,ts,tsx}",
       "src/utils/useApi.js",
+      "!src/mocks/*",
       "!<rootDir>/node_modules/",
       "!<rootDir>/path/to/dir/"
     ]
