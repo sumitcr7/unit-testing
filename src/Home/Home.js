@@ -4,7 +4,10 @@ import useApi from "../utils/useApi";
 import FileUpload from "../FileUpload/FileUpload";
 
 const Home = () => {
-  const [data, callToApi] = useApi({ url: "", method: "get" });
+  const [data, callToApi] = useApi({
+    url: "http://localhost:3030/details",
+    method: "get",
+  });
   const btnConfig = {
     onClick: () => {
       // TODO
@@ -12,7 +15,6 @@ const Home = () => {
       /* I can click button using getbyrole method which will invoke below 
       function but after invoking I want to mock useAPI/axios response
       or error so that I can cover the scenario related to the the api result */
-      console.log("API call");
       callToApi();
     },
   };
@@ -21,7 +23,6 @@ const Home = () => {
     // TODO
     // could not find a way to cover this part as facing issue while mocking axios in file upload component
     if (success) {
-      console.log("here I am setting state after successful file upload");
     }
   };
   return (
@@ -29,7 +30,7 @@ const Home = () => {
       <p>Home page</p>
       {/*   // TODO       */}
       {/* Because the axios response is not mocked, the following condition is not covered. */}
-      {data && data.data?.map(({ label }) => <p>{label}</p>)}
+      {data && data.data?.map(({ label }) => <p key={label}>{label}</p>)}
       <User btnConfig={btnConfig} />
       <FileUpload onUpdate={fileUploaded} />
     </div>

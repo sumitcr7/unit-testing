@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 const UserDetail = ({ onUpdate }) => {
   const [files, setFiles] = useState([]);
+  const [data, setData] = useState("");
 
   const onUploadFile = async () => {
     for (let i = 0; i < files.length; i += 1) {
@@ -15,15 +16,15 @@ const UserDetail = ({ onUpdate }) => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        url: `apiurl`,
+        url: "http://localhost:3030/upload",
         method: "post",
         data: formData,
-        onUploadProgress: (data) => {
+        onUploadProgress: (resp) => {
           console.log(data);
         },
       })
-        .then((data) => {
-          console.log(data);
+        .then((resp) => {
+          setData(resp.data);
         })
         .catch((err) => {
           console.log(err);
@@ -34,6 +35,7 @@ const UserDetail = ({ onUpdate }) => {
   return (
     <div>
       <p>Get user details</p>
+      <p>{data}</p>
       <input
         placeholder="upload"
         type="file"

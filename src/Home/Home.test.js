@@ -5,15 +5,16 @@ import React from "react";
 import Home from "./Home";
 
 describe("Home component", () => {
-  test("First test", () => {
+  test("First test", async () => {
     render(<Home />);
 
     const btn = screen.getByRole("button", { name: /get user/i });
     userEvent.click(btn);
-    console.log("Testing it it works");
+    const file = await screen.findAllByText("file1");
+    expect(file).toHaveLength(1);
   });
 
-  test("second test", () => {
+  test("second test", async () => {
     render(<Home />);
     const fakeFile = new File(["hello"], "hello.png", { type: "image/png" });
 
@@ -21,5 +22,8 @@ describe("Home component", () => {
     userEvent.upload(input, fakeFile);
     const btn = screen.getByRole("button", { name: /upload files/i });
     userEvent.click(btn);
+
+    const successText = await screen.findAllByText("success");
+    expect(successText).toBe(["success"]);
   });
 });
