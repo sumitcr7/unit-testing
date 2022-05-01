@@ -40,6 +40,6 @@ describe("Home component", () => {
     userEvent.click(btn);
 
     const successText = await screen.findAllByText("success");
-    expect(successText).toBe(["success"]);
+    expect(successText).toHaveLength(1);
   });
 });
